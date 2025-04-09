@@ -17,7 +17,7 @@ const HistoryPage: React.FC = () => {
   const { toast } = useToast();
   
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterMethod, setFilterMethod] = useState<string>('');
+  const [filterMethod, setFilterMethod] = useState<string>('all');
   const [filterDate, setFilterDate] = useState<Date | undefined>(undefined);
   
   // Apply filters
@@ -26,7 +26,7 @@ const HistoryPage: React.FC = () => {
       entry.strain.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       entry.notes?.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesMethod = !filterMethod || entry.method === filterMethod;
+    const matchesMethod = filterMethod === 'all' || entry.method === filterMethod;
     
     const matchesDate = !filterDate || format(new Date(entry.date), 'yyyy-MM-dd') === format(filterDate, 'yyyy-MM-dd');
     
@@ -68,7 +68,7 @@ const HistoryPage: React.FC = () => {
   // Clear filters function
   const clearFilters = () => {
     setSearchQuery('');
-    setFilterMethod('');
+    setFilterMethod('all');
     setFilterDate(undefined);
   };
 
@@ -101,7 +101,7 @@ const HistoryPage: React.FC = () => {
                 <SelectValue placeholder="All methods" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All methods</SelectItem>
+                <SelectItem value="all">All methods</SelectItem>
                 <SelectItem value="Smoke">Smoke</SelectItem>
                 <SelectItem value="Vape">Vape</SelectItem>
                 <SelectItem value="Edible">Edible</SelectItem>
@@ -135,7 +135,7 @@ const HistoryPage: React.FC = () => {
             </Popover>
           </div>
           
-          {(searchQuery || filterMethod || filterDate) && (
+          {(searchQuery || filterMethod !== 'all' || filterDate) && (
             <div className="w-full md:w-auto self-end">
               <Button variant="ghost" onClick={clearFilters}>Clear Filters</Button>
             </div>

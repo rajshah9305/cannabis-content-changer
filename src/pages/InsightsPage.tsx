@@ -6,20 +6,21 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useConsumptionStore } from '@/hooks/useConsumptionStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
+import { ConsumptionWithStrain } from '@/models/types';
 
 const InsightsPage: React.FC = () => {
   const { consumptionEntries } = useConsumptionStore();
   
   // Extract store data from consumption entries
   const getStoreData = () => {
-    const storeMap = new Map();
+    const storeMap = new Map<string, ConsumptionWithStrain[]>();
     
     consumptionEntries.forEach(entry => {
       const store = entry.store || 'Unknown';
       if (!storeMap.has(store)) {
         storeMap.set(store, []);
       }
-      storeMap.get(store).push(entry);
+      storeMap.get(store)?.push(entry);
     });
     
     return Array.from(storeMap).map(([storeName, entries]) => ({
@@ -31,8 +32,8 @@ const InsightsPage: React.FC = () => {
   };
   
   // Helper function to get most common strain per store
-  const getMostCommonStrain = (entries) => {
-    const strainCounts = new Map();
+  const getMostCommonStrain = (entries: ConsumptionWithStrain[]) => {
+    const strainCounts = new Map<string, number>();
     entries.forEach(entry => {
       const strainName = entry.strain.name;
       strainCounts.set(strainName, (strainCounts.get(strainName) || 0) + 1);
@@ -134,8 +135,8 @@ const InsightsPage: React.FC = () => {
                           <div className="mt-3">
                             <p className="text-sm font-medium mb-2">Strains from this store:</p>
                             <div className="flex flex-wrap gap-2">
-                              {Array.from(new Set(store.entries.map(entry => entry.strain.name))).map(strain => (
-                                <Badge key={strain} variant="outline" className="bg-cannabis-50 text-cannabis-700">
+                              {Array.from(new Set(store.entries.map(entry => entry.strain.name))).map((strain, idx) => (
+                                <Badge key={idx} variant="outline" className="bg-cannabis-50 text-cannabis-700">
                                   {strain}
                                 </Badge>
                               ))}

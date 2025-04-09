@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { PlusCircle, LineChart, History, Cannabis, BookOpen } from 'lucide-react';
+import { PlusCircle, LineChart, History, Cannabis, BookOpen, Store } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -27,6 +27,9 @@ const Navbar: React.FC = () => {
             </Link>
             <Link to="/strains" className={`${isActive('/strains')} py-1 px-2`}>
               Strains
+            </Link>
+            <Link to="/store" className={`${isActive('/store')} py-1 px-2`}>
+              Store
             </Link>
             <Link to="/history" className={`${isActive('/history')} py-1 px-2`}>
               History
@@ -61,6 +64,10 @@ const Navbar: React.FC = () => {
           <Link to="/history" className={`flex flex-col items-center p-2 ${location.pathname === '/history' ? 'text-cannabis-600' : 'text-muted-foreground'}`}>
             <History className="h-6 w-6" />
             <span className="text-xs">History</span>
+          </Link>
+          <Link to="/store" className={`flex flex-col items-center p-2 ${location.pathname === '/store' ? 'text-cannabis-600' : 'text-muted-foreground'}`}>
+            <Store className="h-6 w-6" />
+            <span className="text-xs">Store</span>
           </Link>
           <Link to="/insights" className={`flex flex-col items-center p-2 ${location.pathname === '/insights' ? 'text-cannabis-600' : 'text-muted-foreground'}`}>
             <LineChart className="h-6 w-6" />

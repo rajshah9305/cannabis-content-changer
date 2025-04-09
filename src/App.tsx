@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import StrainsPage from "./pages/StrainsPage";
 import HistoryPage from "./pages/HistoryPage";
 import InsightsPage from "./pages/InsightsPage";
+import StorePage from "./pages/StorePage";
 import AddEntryPage from "./pages/AddEntryPage";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
@@ -23,6 +24,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Layout><Dashboard /></Layout>} />
           <Route path="/strains" element={<Layout><StrainsPage /></Layout>} />
+          <Route path="/store" element={<Layout><StorePage /></Layout>} />
           <Route path="/history" element={<Layout><HistoryPage /></Layout>} />
           <Route path="/insights" element={<Layout><InsightsPage /></Layout>} />
           <Route path="/add" element={<Layout><AddEntryPage /></Layout>} />

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Cannabis theme colors
+				cannabis: {
+					'50': '#f3f8f1',
+					'100': '#e5f0df',
+					'200': '#cce3c3',
+					'300': '#abd19d',
+					'400': '#84b86f',
+					'500': '#599c4b',
+					'600': '#3d7d39',
+					'700': '#306231',
+					'800': '#294f2a',
+					'900': '#234225',
+					'950': '#0f230f',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

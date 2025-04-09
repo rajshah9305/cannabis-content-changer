@@ -28,6 +28,7 @@ export type ConsumptionEntry = {
   physicalEffects: PhysicalEffect[];
   rating: number;
   notes?: string;
+  store?: string; // Added store field
 };
 
 export type ConsumptionWithStrain = ConsumptionEntry & {
